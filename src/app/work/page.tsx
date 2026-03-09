@@ -6,72 +6,94 @@ import Image from "next/image";
 export default function Work() {
   const projects = [
     {
-      title: "Modern Portfolio",
-      tech: "Next.js • Tailwind",
-      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+      title: "Car-X",
+      tech: "MERN Stack • Full-Stack",
+      image:
+        "https://images.unsplash.com/photo-1494976388531-d1058494cdd8",
+      live: "https://car-x-1.onrender.com/",
     },
     {
-      title: "E-Commerce Platform",
-      tech: "React • Stripe",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d",
+      title: "Instastay",
+      tech: "MERN Stack • Booking Platform",
+      image:
+        "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2",
+      live: "https://instastay-v2aj.onrender.com/",
     },
     {
-      title: "Dashboard UI",
-      tech: "TypeScript • Charts",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
+      title: "NextMusic Academy",
+      tech: "Next.js • TypeScript • Tailwind",
+      image:
+        "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4",
+      live: "https://nextmusic-academy-2.onrender.com/",
     },
   ];
 
   return (
-    <section className="relative max-w-6xl mx-auto py-28 px-6 overflow-hidden">
-
-      {/* Soft Gradient Glow */}
+    <section className="relative max-w-7xl mx-auto py-32 px-6 overflow-hidden">
+      
+      {/* Background Glow */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute w-[400px] h-[400px] bg-purple-200 rounded-full blur-3xl opacity-30 top-[-120px] right-[-120px]" />
-        <div className="absolute w-[300px] h-[300px] bg-blue-200 rounded-full blur-3xl opacity-30 bottom-[-100px] left-[-100px]" />
+        <div className="absolute w-[500px] h-[500px] bg-purple-300 rounded-full blur-[140px] opacity-20 top-[-150px] right-[-150px]" />
+        <div className="absolute w-[400px] h-[400px] bg-blue-300 rounded-full blur-[120px] opacity-20 bottom-[-150px] left-[-150px]" />
       </div>
 
       <motion.h2
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.7 }}
         viewport={{ once: true }}
-        className="text-4xl md:text-5xl font-serif mb-16 text-center"
+        className="text-4xl md:text-6xl font-semibold text-center mb-20 bg-gradient-to-r from-black to-gray-500 bg-clip-text text-transparent"
       >
-        My Latest Projects
+        Featured Projects
       </motion.h2>
 
-      <div className="grid md:grid-cols-3 gap-10">
+      <div className="grid md:grid-cols-3 gap-12">
         {projects.map((project, index) => (
           <motion.div
             key={index}
-            whileHover={{ y: -12, scale: 1.02 }}
+            whileHover={{ y: -10 }}
             transition={{ type: "spring", stiffness: 200 }}
-            className="bg-white rounded-3xl shadow-md hover:shadow-2xl transition duration-300 overflow-hidden border border-gray-100"
+            className="group relative rounded-3xl overflow-hidden bg-white/70 backdrop-blur-xl border border-gray-200 shadow-xl hover:shadow-2xl transition duration-500"
           >
             {/* Image */}
-            <div className="relative h-56 w-full">
+            <div className="relative h-64 w-full overflow-hidden">
               <Image
                 src={project.image}
                 alt={project.title}
                 fill
-                className="object-cover"
+                className="object-cover group-hover:scale-110 transition duration-700"
               />
+
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-80" />
             </div>
 
             {/* Content */}
-            <div className="p-6">
-              <span className="inline-block text-xs px-3 py-1 mb-3 rounded-full bg-pink-100 text-pink-600">
-                Featured
+            <div className="absolute bottom-0 p-6 text-white w-full">
+              <span className="text-xs uppercase tracking-widest text-gray-300">
+                Live Project
               </span>
 
-              <h3 className="text-lg font-semibold mb-2">
+              <h3 className="text-xl font-semibold mt-2 mb-2">
                 {project.title}
               </h3>
 
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-300 mb-4">
                 {project.tech}
               </p>
+
+              {/* Button */}
+              <a
+                href={project.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-medium px-5 py-2 rounded-full bg-white text-black hover:bg-gray-200 transition duration-300"
+              >
+                View Live
+                <span className="group-hover:translate-x-1 transition">
+                  →
+                </span>
+              </a>
             </div>
           </motion.div>
         ))}
