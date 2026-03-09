@@ -34,7 +34,7 @@ export default function About() {
 
           {/* Floating Experience Badge */}
           <div className="absolute -bottom-6 -right-6 bg-black text-white px-6 py-3 rounded-2xl shadow-lg">
-            <p className="text-sm">2+ Years Experience</p>
+            <p className="text-sm">Freshers</p>
           </div>
         </motion.div>
 
@@ -50,24 +50,24 @@ export default function About() {
           </h2>
 
           <p className="text-gray-600 leading-relaxed mb-6">
-            I am a frontend developer focused on building clean,
-            scalable, and performance-driven web applications.
-            My goal is to craft seamless digital experiences
-            using modern technologies like Next.js, React,
-            and TypeScript.
+            Final-year Cybersecurity student at IPS Academy, Indore,
+             with practical experience in full-stack development.
+              Proficient in developing scalable, 
+              performance-driven web applications using modern frontend and backend technologies.
+               Dedicated to clean architecture, maintainable code, 
+            and delivering intuitive, user-focused web solutions..
           </p>
 
           <p className="text-gray-600 leading-relaxed mb-10">
-            I enjoy transforming complex problems into elegant
-            and intuitive user interfaces. I believe in writing
-            maintainable code and continuously improving my
-            technical expertise.
+            I enjoy turning complex problems into intuitive user interfaces. 
+            I focus on writing clean, maintainable code and continuously improving my 
+            technical skills.
           </p>
 
           {/* Stats */}
           <div className="grid grid-cols-3 gap-6">
             <div className="bg-white p-6 rounded-2xl shadow-md text-center border border-gray-100">
-              <h3 className="text-2xl font-semibold">10+</h3>
+              <h3 className="text-2xl font-semibold">5+</h3>
               <p className="text-sm text-gray-500 mt-1">Projects</p>
             </div>
 
