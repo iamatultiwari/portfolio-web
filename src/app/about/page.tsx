@@ -72,7 +72,7 @@ export default function About() {
             </div>
 
             <div className="bg-white p-6 rounded-2xl shadow-md text-center border border-gray-100">
-              <h3 className="text-2xl font-semibold">5+</h3>
+              <h3 className="text-2xl font-semibold">7+</h3>
               <p className="text-sm text-gray-500 mt-1">Technologies</p>
             </div>
 
