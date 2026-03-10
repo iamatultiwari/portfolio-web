@@ -8,10 +8,12 @@ import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const pathname = usePathname();
-
-  const [image, setImage] = useState<string>("/atul.jpg");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const DEFAULT_IMAGE = "/atul.jpg";
+  const [image, setImage] = useState<string>(DEFAULT_IMAGE);
+
+  // Load saved image
   useEffect(() => {
     const savedImage = localStorage.getItem("profileImage");
     if (savedImage) {
@@ -19,16 +21,52 @@ export default function Navbar() {
     }
   }, []);
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const result = reader.result as string;
-        setImage(result);
-        localStorage.setItem("profileImage", result);
-      };
-      reader.readAsDataURL(e.target.files[0]);
+  // 🔥 Optimized Image Upload Handler
+  const handleImageChange = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Limit file size (1MB max)
+    if (file.size > 1024 * 1024) {
+      alert("Image must be less than 1MB");
+      return;
     }
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const img = new window.Image();
+      img.src = reader.result as string;
+
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const MAX_SIZE = 300; // resize to 300x300
+
+        canvas.width = MAX_SIZE;
+        canvas.height = MAX_SIZE;
+
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+
+        // Draw resized image
+        ctx.drawImage(img, 0, 0, MAX_SIZE, MAX_SIZE);
+
+        // Compress to JPEG (0.7 quality)
+        const optimizedBase64 = canvas.toDataURL("image/jpeg", 0.7);
+
+        setImage(optimizedBase64);
+        localStorage.setItem("profileImage", optimizedBase64);
+      };
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  const removeImage = () => {
+    localStorage.removeItem("profileImage");
+    setImage(DEFAULT_IMAGE);
   };
 
   const navItems = [
@@ -51,7 +89,6 @@ export default function Navbar() {
           {/* Logo + Avatar */}
           <Link href="/" className="flex items-center gap-4 group relative">
 
-            {/* Avatar */}
             <div
               onClick={(e) => {
                 e.preventDefault();
@@ -60,26 +97,24 @@ export default function Navbar() {
               className="relative w-20 h-20 rounded-full overflow-hidden 
                          border-2 border-white 
                          ring-2 ring-gray-200 
-                         shadow-md 
-                         cursor-pointer 
-                         transition duration-300 
-                         hover:ring-gray-400"
+                         shadow-md cursor-pointer
+                         hover:ring-gray-400 transition"
             >
               <Image
+                key={image}                 // 🔥 force re-render
                 src={image}
                 alt="Atul Tiwari"
                 width={100}
                 height={100}
-                className="rounded-full object-cover transition duration-300 group-hover:scale-105"
+                unoptimized                // 🔥 disable Next cache
+                className="rounded-full object-cover"
               />
 
-              {/* Hover Overlay */}
               <div className="absolute inset-0 bg-black/0 hover:bg-black/30 transition flex items-center justify-center text-white text-xs opacity-0 hover:opacity-100">
-                photo
+                Change
               </div>
             </div>
 
-            {/* Hidden File Input */}
             <input
               type="file"
               accept="image/*"
@@ -88,8 +123,7 @@ export default function Navbar() {
               className="hidden"
             />
 
-            {/* Name */}
-            <span className="text-xl font-semibold tracking-tight text-gray-900 group-hover:opacity-80 transition">
+            <span className="text-xl font-semibold tracking-tight text-gray-900">
               Atul Tiwari <span className="text-gray-400">.</span>
             </span>
           </Link>
@@ -103,47 +137,35 @@ export default function Navbar() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`relative text-sm font-medium transition duration-300 ${
+                  className={`relative text-sm font-medium transition ${
                     isActive
                       ? "text-gray-900"
                       : "text-gray-500 hover:text-gray-900"
                   }`}
                 >
                   {item.name}
-
-                  {isActive && (
-                    <motion.span
-                      layoutId="activeNav"
-                      className="absolute -bottom-3 left-0 right-0 h-[2px] bg-gray-900 rounded-full"
-                    />
-                  )}
                 </Link>
               );
             })}
           </nav>
 
           {/* Right Section */}
-          <div className="flex items-center gap-6">
-            <div className="hidden md:flex items-center gap-2 text-xs text-gray-500">
-              <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-              Open to Work
-            </div>
-
-
-
+     <div className="flex items-center gap-6"> <div 
+     className="hidden md:flex items-center gap-2 text-xs text-gray-500"> 
+     <span className="w-2 h-2 bg-green-500 rounded-full"></span> 
+     Open to Work </div>
             <a
-            href="https://drive.google.com/uc?export=download&id=1yjMLDHZA3LgWoS5zN9G68QXvPshmdcsf"
-            target="_blank"
-            rel="oopener noreferrer"
-            className="px-5 py-2 text-sm font-medium rounded-md
+              href="https://drive.google.com/uc?export=download&id=1yjMLDHZA3LgWoS5zN9G68QXvPshmdcsf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5 py-2 text-sm font-medium rounded-md
                          bg-gray-900 text-white
-                         hover:bg-black transition duration-300
-                         shadow-sm">
-                             Download CV
-                             </a>
+                         hover:bg-black transition"
+            >
+              Download CV
+            </a>
 
           </div>
-
         </div>
       </div>
     </motion.header>

@@ -7,7 +7,7 @@ export default function Services() {
     {
       title: "Frontend Development",
       description:
-        "Developing modern, responsive, and highly interactive user interfaces using React, Next.js, and TypeScript with a focus on performance and accessibility.",
+        "Developing responsive and interactive web applications using HTML, CSS, JavaScript, React, and Next.js, with foundational knowledge of TypeScript and Tailwind CSS.",
     },
     {
       title: "Backend Development",
