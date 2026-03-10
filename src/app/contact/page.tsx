@@ -42,8 +42,7 @@ export default function Contact() {
   };
 
   return (
-    <section className="relative py-36 px-6 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden">
-
+   <section className="relative py-36 px-6 bg-gray-100 overflow-hidden">
       {/* Background Blur Effects */}
       <div className="absolute -top-32 -left-32 w-[400px] h-[400px] bg-blue-200 rounded-full blur-3xl opacity-30"></div>
       <div className="absolute -bottom-32 -right-32 w-[400px] h-[400px] bg-purple-200 rounded-full blur-3xl opacity-30"></div>
