@@ -2,8 +2,21 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function About() {
+ const DEFAULT_IMAGE =
+ "/atul.jpg";
+  const [image, setImage] = useState<string>(DEFAULT_IMAGE);
+
+  // Load profile image from localStorage
+  useEffect(() => {
+    const savedImage = localStorage.getItem("profileImage");
+    if (savedImage) {
+      setImage(savedImage);
+    }
+  }, []);
+
   return (
     <section className="relative max-w-6xl mx-auto py-28 px-6 overflow-hidden">
 
@@ -25,14 +38,15 @@ export default function About() {
         >
           <div className="relative w-full h-[420px] rounded-3xl overflow-hidden shadow-xl">
             <Image
-              src="https://images.unsplash.com/photo-1603415526960-f7e0328c63b1"
+              key={image}          // 🔥 force re-render
+              src={image}
               alt="Atul Tiwari"
               fill
-              className="object-cover"
+              unoptimized          // 🔥 required for base64 images
+              className="object-contain"
             />
           </div>
 
-          {/* Floating Experience Badge */}
           <div className="absolute -bottom-6 -right-6 bg-black text-white px-6 py-3 rounded-2xl shadow-lg">
             <p className="text-sm">Freshers</p>
           </div>
@@ -51,17 +65,17 @@ export default function About() {
 
           <p className="text-gray-600 leading-relaxed mb-6">
             Final-year Cybersecurity student at IPS Academy, Indore,
-             with practical experience in full-stack development.
-              Proficient in developing scalable, 
-              performance-driven web applications using modern frontend and backend technologies.
-               Dedicated to clean architecture, maintainable code, 
-            and delivering intuitive, user-focused web solutions..
+            with practical experience in full-stack development.
+            Proficient in developing scalable, performance-driven web applications
+            using modern frontend and backend technologies.
+            Dedicated to clean architecture, maintainable code,
+            and delivering intuitive, user-focused web solutions.
           </p>
 
           <p className="text-gray-600 leading-relaxed mb-10">
-            I enjoy turning complex problems into intuitive user interfaces. 
-            I focus on writing clean, maintainable code and continuously improving my 
-            technical skills.
+            I enjoy turning complex problems into intuitive user interfaces.
+            I focus on writing clean, maintainable code and continuously
+            improving my technical skills.
           </p>
 
           {/* Stats */}
