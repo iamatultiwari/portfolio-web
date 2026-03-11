@@ -64,18 +64,21 @@ export default function About() {
           </h2>
 
           <p className="text-gray-600 leading-relaxed mb-6">
-            Final-year Cybersecurity student at IPS Academy, Indore,
-            with practical experience in full-stack development.
-            Proficient in developing scalable, performance-driven web applications
-            using modern frontend and backend technologies.
-            Dedicated to clean architecture, maintainable code,
-            and delivering intuitive, user-focused web solutions.
+            Hello! I’m Atul Tiwari, a final-year Computer Science student and an aspiring Full Stack Developer passionate about building modern, scalable, and user-friendly web applications.
+
+Throughout my academic journey, I have primarily worked on individual projects, independently managing the complete development lifecycle — from planning and UI design to backend implementation and deployment. This hands-on approach has strengthened my problem-solving ability, technical depth, and sense of ownership in every project I build.
+
+My core expertise lies in Java and JavaScript, and I actively work with modern technologies such as React, Next.js, Node.js, and relational databases. I focus on writing clean, maintainable, and structured code while ensuring performance and scalability. I enjoy designing intuitive user interfaces just as much as building robust backend logic.
+
+Working independently has helped me develop strong self-discipline, adaptability, and continuous learning habits. I consistently explore new technologies, improve my development practices, and refine my understanding of full-stack architecture to stay aligned with industry standards.
+
           </p>
 
           <p className="text-gray-600 leading-relaxed mb-10">
-            I enjoy turning complex problems into intuitive user interfaces.
-            I focus on writing clean, maintainable code and continuously
-            improving my technical skills.
+            
+I am currently seeking opportunities where I can contribute to meaningful projects, grow alongside experienced professionals, and apply my skills in a real-world environment.
+
+I’m excited about building impactful digital solutions and turning ideas into reality.
           </p>
 
           {/* Stats */}
